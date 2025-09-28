@@ -1,16 +1,16 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {Toolbar} from './components/toolbar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Toolbar],
   template: `
-    <h1>Welcome to {{ title() }}!</h1>
+    <app-toolbar />
 
     <router-outlet />
   `,
   styles: [],
 })
 export class App {
-  protected readonly title = signal('devfest-delorean-shop');
 }
