@@ -28,7 +28,7 @@ import {AppStore} from '../state/store';
           @if (!isInCart()) {
             <button class="btn btn-primary" (click)="store.addToCart(item())">Buy Now</button>
           } @else {
-            <button class="btn btn-ghost" (click)="store.removeFromCart(item())">Remove From Cart</button>
+            <button class="btn btn-secondary" (click)="store.removeFromCart(item())">Remove From Cart</button>
           }
         </div>
       </div>
