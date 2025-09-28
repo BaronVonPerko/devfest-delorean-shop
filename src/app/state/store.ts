@@ -1,4 +1,12 @@
-import {patchState, signalStore, withComputed, withHooks, withMethods, withState} from '@ngrx/signals';
+import {
+  PartialStateUpdater,
+  patchState,
+  signalStore,
+  withComputed,
+  withHooks,
+  withMethods,
+  withState
+} from '@ngrx/signals';
 import {computed, inject} from '@angular/core';
 import {ApiService} from '../services/api';
 import {rxMethod} from '@ngrx/signals/rxjs-interop';
@@ -56,8 +64,8 @@ export const AppStore = signalStore(
       pipe(
         switchMap(() => api.getShopItems().pipe(
           tapResponse({
-            next: items => patchState(store, addEntities(items), {loading: 'success'}),
-            error: () => patchState(store, {loading: 'error'})
+            next: items => patchState(store, addEntities(items), setComplete()),
+            error: () => patchState(store, setError())
           })
         )),
       )
@@ -70,3 +78,11 @@ export const AppStore = signalStore(
     }
   }))
 )
+
+function setError(): PartialStateUpdater<{loading: LoadingStatus}> {
+  return state => ({loading: 'error'});
+}
+
+function setComplete(): PartialStateUpdater<{ loading: LoadingStatus }> {
+  return state => ({loading: 'success'});
+}

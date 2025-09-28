@@ -13,6 +13,8 @@ import {ItemCard} from '../components/item-card';
   template: `
     @for (item of store.entities(); track $index) {
       <app-item-card [item]="item" />
+    } @empty {
+      <p>Please stand by...</p>
     }
   `,
   styles: ``

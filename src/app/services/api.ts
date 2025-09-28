@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {delay, Observable, of} from 'rxjs';
 import {Item} from '../models/item';
 
 @Injectable({
@@ -53,6 +53,8 @@ export class ApiService {
         alt: 'A hazard-marked yellow case containing radioactive plutonium rods with the radiation symbol prominently displayed',
         isNew: true,
       }
-    ])
+    ]).pipe(
+      delay(3000)
+    )
   }
 }
