@@ -13,7 +13,7 @@ import {rxMethod} from '@ngrx/signals/rxjs-interop';
 import {pipe, switchMap} from 'rxjs';
 import {tapResponse} from '@ngrx/operators';
 import {ShopItem} from '../models/item';
-import {addEntities, updateEntity, withEntities} from '@ngrx/signals/entities';
+import {setEntities, updateEntity, withEntities} from '@ngrx/signals/entities';
 
 type LoadingStatus = 'loading' | 'error' | 'success';
 
@@ -64,8 +64,8 @@ export const AppStore = signalStore(
       pipe(
         switchMap(() => api.getShopItems().pipe(
           tapResponse({
-            next: items => patchState(store, addEntities(items), setComplete()),
-            error: () => patchState(store, setError())
+            next: items => patchState(store, setEntities(items), {loading: 'success'}),
+            error: () => patchState(store, {loading: 'error'})
           })
         )),
       )
